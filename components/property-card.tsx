@@ -47,7 +47,7 @@ export function PropertyCard({ property }: PropertyCardProps) {
             </Badge>
 
             <Badge
-              variant="destructive"
+              variant={totalTickets > 0 ? "destructive" : "outline"}
               className="text-xs flex items-center gap-1"
             >
               <AlertCircle className="h-3 w-3" />
