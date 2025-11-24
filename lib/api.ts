@@ -1,4 +1,4 @@
-import { Property, Ticket } from "./types";
+import { AIResponse, GenerateResponseInput, Property, Ticket } from "./types";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
 
@@ -22,4 +22,12 @@ export const propertiesApi = {
 
 export const ticketsApi = {
   getAll: () => fetcher<Ticket[]>("/tickets"),
+};
+
+export const aiApi = {
+  generateResponse: (data: GenerateResponseInput) =>
+    fetcher<AIResponse>("/ai/generate-response", {
+      method: "POST",
+      body: JSON.stringify(data),
+    }),
 };

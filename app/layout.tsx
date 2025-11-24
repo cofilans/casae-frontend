@@ -4,6 +4,8 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { TicketDialogProvider } from "@/components/providers/ticket-dialog-provider";
+import { AIComposerProvider } from "@/components/providers/ai-composer-provider";
+import { CreateTicketProvider } from "@/components/providers/create-ticket-provider";
 import { Header } from "@/components/header";
 
 const geistSans = Geist({
@@ -32,13 +34,17 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryProvider>
-          <TicketDialogProvider>
-            <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black">
-              <Header />
-              {children}
-            </div>
-            <Toaster richColors position="bottom-right" />
-          </TicketDialogProvider>
+          <AIComposerProvider>
+            <TicketDialogProvider>
+              <CreateTicketProvider>
+                <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black">
+                  <Header />
+                  {children}
+                </div>
+                <Toaster richColors position="bottom-right" />
+              </CreateTicketProvider>
+            </TicketDialogProvider>
+          </AIComposerProvider>
         </QueryProvider>
       </body>
     </html>

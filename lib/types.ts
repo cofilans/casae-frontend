@@ -63,3 +63,11 @@ export interface Ticket {
   tenant?: Tenant;
   unit?: Unit;
 }
+
+export interface GenerateResponseInput {
+  ticketId: string;
+}
+
+export interface AIResponse {
+  draft: string;
+}
