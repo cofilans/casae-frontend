@@ -20,6 +20,7 @@ import {
   Sparkles,
   User,
 } from "lucide-react";
+import { useAIComposer } from "@/components/providers/ai-composer-provider";
 
 interface TicketDetailsDialogProps {
   ticket: Ticket | null;
@@ -32,7 +33,13 @@ export function TicketDetailsDialog({
   open,
   onOpenChange,
 }: TicketDetailsDialogProps) {
+  const { openAIComposer } = useAIComposer();
+
   if (!ticket) return null;
+
+  const handleOpenAIComposer = () => {
+    openAIComposer(ticket);
+  };
 
   return (
     <>
@@ -40,9 +47,7 @@ export function TicketDetailsDialog({
         <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl">{ticket.title}</DialogTitle>
-            <DialogDescription>
-              Ticket #{ticket.id.slice(0, 8)}
-            </DialogDescription>
+            <DialogDescription>Ticket #{ticket.id}</DialogDescription>
           </DialogHeader>
 
           <div className="space-y-6 py-4">
@@ -58,7 +63,7 @@ export function TicketDetailsDialog({
                 <Badge
                   className={
                     ticket.priority === "HIGH"
-                      ? "bg-orange-200 text-orange-800"
+                      ? "bg-red-200 text-red-800"
                       : ticket.priority === "MEDIUM"
                       ? "bg-blue-200 text-blue-800"
                       : "bg-gray-200 text-gray-800"
@@ -135,7 +140,7 @@ export function TicketDetailsDialog({
 
             <Separator />
 
-            <Button onClick={() => {}} className="w-full" size="lg">
+            <Button onClick={handleOpenAIComposer} className="w-full" size="lg">
               <Sparkles className="mr-2 h-5 w-5" />
               Draft Response with AI
             </Button>

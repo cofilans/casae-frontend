@@ -1,13 +1,15 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Building2, Ticket } from "lucide-react";
+import { ArrowLeft, Building2, Plus, Ticket } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useCreateTicket } from "@/components/providers/create-ticket-provider";
 
 export function Header() {
   const pathname = usePathname();
   const isTicketsPage = pathname === "/tickets";
+  const { openCreateTicketDialog } = useCreateTicket();
 
   return (
     <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
@@ -28,12 +30,22 @@ export function Header() {
           </Link>
           <div className="flex items-center gap-3">
             {isTicketsPage ? (
-              <Link href="/">
-                <Button variant="outline" className="gap-2">
-                  <ArrowLeft className="h-4 w-4" />
-                  Go Home
+              <>
+                <Link href="/">
+                  <Button variant="outline" className="gap-2">
+                    <ArrowLeft className="h-4 w-4" />
+                    Go Home
+                  </Button>
+                </Link>
+                <Button
+                  variant="default"
+                  className="gap-2"
+                  onClick={openCreateTicketDialog}
+                >
+                  Create Ticket
+                  <Plus className="h-4 w-4" />
                 </Button>
-              </Link>
+              </>
             ) : (
               <Link href="/tickets">
                 <Button variant="outline" className="gap-2">

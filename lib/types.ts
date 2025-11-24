@@ -71,3 +71,12 @@ export interface GenerateResponseInput {
 export interface AIResponse {
   draft: string;
 }
+
+export interface CreateTicketInput {
+  tenantId: string;
+  unitId: string;
+  title: string;
+  description: string;
+  priority: Priority;
+  preferredTimeslot?: string;
+}
