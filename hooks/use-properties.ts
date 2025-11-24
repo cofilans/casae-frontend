@@ -14,3 +14,10 @@ export function usePropertiesDetailed() {
     queryFn: propertiesApi.getAllDetailed,
   });
 }
+
+export function useProperty(id: string) {
+  return useQuery({
+    queryKey: ["property", id],
+    queryFn: () => propertiesApi.getById(id),
+  });
+}

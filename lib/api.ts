@@ -17,4 +17,5 @@ async function fetcher<T>(url: string, options?: RequestInit): Promise<T> {
 export const propertiesApi = {
   getAll: () => fetcher<Property[]>("/properties"),
   getAllDetailed: () => fetcher<Property[]>("/properties/detailed"),
+  getById: (id: string) => fetcher<Property>(`/properties/${id}`),
 };
