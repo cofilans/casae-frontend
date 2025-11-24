@@ -7,3 +7,10 @@ export function useProperties() {
     queryFn: propertiesApi.getAll,
   });
 }
+
+export function usePropertiesDetailed() {
+  return useQuery({
+    queryKey: ["properties-detailed"],
+    queryFn: propertiesApi.getAllDetailed,
+  });
+}

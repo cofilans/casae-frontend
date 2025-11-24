@@ -1,10 +1,11 @@
 "use client";
+import { PropertyCard } from "@/components/property-card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useProperties } from "@/hooks/use-properties";
+import { usePropertiesDetailed } from "@/hooks/use-properties";
 import { Building2 } from "lucide-react";
 
 export default function Home() {
-  const { data: properties, isLoading, error } = useProperties();
+  const { data: properties, isLoading, error } = usePropertiesDetailed();
 
   return (
     <main className="container mx-auto px-4 py-8">
@@ -32,14 +33,11 @@ export default function Home() {
         <div className="text-center py-16">
           <Building2 className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-xl font-semibold mb-2">No properties found</h3>
-          <p className="text-muted-foreground mb-6">
-            Make sure your backend database is seeded with data
-          </p>
         </div>
       ) : properties ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {properties.map((property) => (
-            <pre key={property.id}>{JSON.stringify(property, null, 2)}</pre>
+            <PropertyCard key={property.id} property={property} />
           ))}
         </div>
       ) : null}
