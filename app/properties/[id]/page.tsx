@@ -6,7 +6,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UnitCard } from "@/components/unit-card";
 import { useProperty } from "@/hooks/use-properties";
-import { Ticket } from "@/lib/types";
 import { AlertCircle, ArrowLeft, Home, MapPin } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 
@@ -22,9 +21,17 @@ export default function PropertyDetailPage() {
   const tickets =
     property?.units
       ?.flatMap(
-        (unit) => unit.tenants?.flatMap((tenant) => tenant.tickets) || []
+        (unit) =>
+          unit.tenants?.flatMap(
+            (tenant) =>
+              tenant.tickets?.map((ticket) => ({
+                ...ticket,
+                tenant: tenant,
+                unit: unit,
+              })) || []
+          ) || []
       )
-      .filter((ticket): ticket is Ticket => ticket !== undefined) || [];
+      .filter((ticket) => ticket !== undefined) || [];
 
   console.log(tickets);
 
@@ -121,18 +128,13 @@ export default function PropertyDetailPage() {
           </TabsContent>
 
           <TabsContent value="tickets" className="space-y-6">
-            {tickets.filter((ticket): ticket is Ticket => ticket !== undefined)
-              .length > 0 ? (
+            {tickets.length > 0 ? (
               <>
                 <div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {tickets
-                      .filter(
-                        (ticket): ticket is Ticket => ticket !== undefined
-                      )
-                      .map((ticket) => (
-                        <TicketCard key={ticket.id} ticket={ticket} />
-                      ))}
+                    {tickets.map((ticket) => (
+                      <TicketCard key={ticket.id} ticket={ticket} />
+                    ))}
                   </div>
                 </div>
               </>

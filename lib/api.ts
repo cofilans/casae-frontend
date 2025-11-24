@@ -1,4 +1,4 @@
-import { Property } from "./types";
+import { Property, Ticket } from "./types";
 
 const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
 
@@ -18,4 +18,8 @@ export const propertiesApi = {
   getAll: () => fetcher<Property[]>("/properties"),
   getAllDetailed: () => fetcher<Property[]>("/properties/detailed"),
   getById: (id: string) => fetcher<Property>(`/properties/${id}`),
+};
+
+export const ticketsApi = {
+  getAll: () => fetcher<Ticket[]>("/tickets"),
 };
