@@ -8,11 +8,13 @@ import { UnitCard } from "@/components/unit-card";
 import { useProperty } from "@/hooks/use-properties";
 import { AlertCircle, ArrowLeft, Home, MapPin } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
+import { useTicketDialog } from "@/components/providers/ticket-dialog-provider";
 
 export default function PropertyDetailPage() {
   const params = useParams();
   const router = useRouter();
   const propertyId = params.id as string;
+  const { openTicketDialog } = useTicketDialog();
 
   const { data: property, isLoading: isLoadingProperty } =
     useProperty(propertyId);
@@ -133,7 +135,11 @@ export default function PropertyDetailPage() {
                 <div>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {tickets.map((ticket) => (
-                      <TicketCard key={ticket.id} ticket={ticket} />
+                      <TicketCard
+                        key={ticket.id}
+                        ticket={ticket}
+                        onViewDetails={openTicketDialog}
+                      />
                     ))}
                   </div>
                 </div>

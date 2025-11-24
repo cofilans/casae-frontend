@@ -3,9 +3,11 @@ import { TicketCard } from "@/components/ticket-card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTickets } from "@/hooks/use-tickets";
 import { AlertCircle } from "lucide-react";
+import { useTicketDialog } from "@/components/providers/ticket-dialog-provider";
 
 export default function TicketsPage() {
   const { data: tickets, isLoading, error } = useTickets();
+  const { openTicketDialog } = useTicketDialog();
 
   if (isLoading) {
     return (
@@ -40,7 +42,11 @@ export default function TicketsPage() {
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {tickets.map((ticket) => (
-                <TicketCard key={ticket.id} ticket={ticket} />
+                <TicketCard
+                  key={ticket.id}
+                  ticket={ticket}
+                  onViewDetails={openTicketDialog}
+                />
               ))}
             </div>
           </div>

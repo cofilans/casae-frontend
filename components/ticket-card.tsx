@@ -22,6 +22,7 @@ import {
 
 interface TicketCardProps {
   ticket: Ticket;
+  onViewDetails: (ticket: Ticket) => void;
 }
 
 const statusConfig = {
@@ -51,7 +52,7 @@ const priorityConfig = {
   HIGH: { color: "bg-red-200 text-red-800", label: "High" },
 };
 
-export function TicketCard({ ticket }: TicketCardProps) {
+export function TicketCard({ ticket, onViewDetails }: TicketCardProps) {
   const statusInfo = statusConfig[ticket.status];
   const priorityInfo = priorityConfig[ticket.priority];
   const StatusIcon = statusInfo.icon;
@@ -108,7 +109,13 @@ export function TicketCard({ ticket }: TicketCardProps) {
           </span>
         </div>
 
-        <Button variant="outline" className="w-full mt-2" onClick={() => {}}>
+        <Button
+          variant="outline"
+          className="w-full mt-2"
+          onClick={() => {
+            onViewDetails(ticket);
+          }}
+        >
           View Details
         </Button>
       </CardContent>

@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/components/providers/query-provider";
+import { TicketDialogProvider } from "@/components/providers/ticket-dialog-provider";
 import { Header } from "@/components/header";
 
 const geistSans = Geist({
@@ -31,11 +32,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryProvider>
-          <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black">
-            <Header />
-            {children}
-          </div>
-          <Toaster richColors position="bottom-right" />
+          <TicketDialogProvider>
+            <div className="min-h-screen bg-zinc-50 font-sans dark:bg-black">
+              <Header />
+              {children}
+            </div>
+            <Toaster richColors position="bottom-right" />
+          </TicketDialogProvider>
         </QueryProvider>
       </body>
     </html>
