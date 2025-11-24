@@ -13,17 +13,19 @@ export function Header() {
     <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-primary rounded-lg">
-              <Building2 className="h-6 w-6 text-primary-foreground" />
+          <Link href="/">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-primary rounded-lg">
+                <Building2 className="h-6 w-6 text-primary-foreground" />
+              </div>
+              <div>
+                <h1 className="text-2xl leading-tight font-bold">Casae</h1>
+                <p className="text-sm text-muted-foreground">
+                  Property Management System
+                </p>
+              </div>
             </div>
-            <div>
-              <h1 className="text-2xl leading-tight font-bold">Casae</h1>
-              <p className="text-sm text-muted-foreground">
-                Property Management System
-              </p>
-            </div>
-          </div>
+          </Link>
           <div className="flex items-center gap-3">
             {isTicketsPage ? (
               <Link href="/">
